@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-// ----- 주제: Light 조명
+// ----- 주제: 애니메이션 기본
 
 export default function example() {
     // Renderer
@@ -24,8 +24,6 @@ export default function example() {
         0.1,    // near
         1000    // far
     );
-    camera.position.x = 2;
-    camera.position.y = 2;
     camera.position.z = 5;
     scene.add(camera);
 
@@ -43,7 +41,21 @@ export default function example() {
     scene.add(mesh);
 
     // 그리기
-    renderer.render(scene, camera);
+    function draw() {
+        // 각도는 Radian을 사용
+        // 360도는 2파이
+        // mesh.rotation.y += 0.1;
+        mesh.rotation.y += THREE.MathUtils.degToRad(10);
+        mesh.position.y += 0.01;
+        if(mesh.position.y > 3) {
+            mesh.position.y = 0;
+        }
+        renderer.render(scene, camera);
+
+        // window.requestAnimationFrame(draw);
+        renderer.setAnimationLoop(draw);
+    }
+
 
     function setSize() {
         // 카메라
@@ -56,4 +68,6 @@ export default function example() {
 
     // 이벤트
     window.addEventListener('resize', setSize);
+
+    draw();
 }
