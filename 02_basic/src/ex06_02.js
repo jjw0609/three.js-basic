@@ -41,18 +41,18 @@ export default function example() {
     scene.add(mesh);
 
     // 그리기
-    const clock = new THREE.Clock();
+    let oldTime = Date.now();
 
     function draw() {
-        // console.log(clock.getElapsedTime());
-        const time = clock.getElapsedTime();
-
+        const newTime = Date.now();
+        const deltaTime = newTime - oldTime;
+        oldTime = newTime;
         // 각도는 Radian을 사용
         // 360도는 2파이
         // mesh.rotation.y += 0.1;
         // mesh.rotation.y += THREE.MathUtils.degToRad(1);
-        mesh.rotation.y = time;
-        mesh.position.y = time;
+        mesh.rotation.y += deltaTime * 0.005;
+        mesh.position.y += deltaTime * 0.001;
         if(mesh.position.y > 3) {
             mesh.position.y = 0;
         }
