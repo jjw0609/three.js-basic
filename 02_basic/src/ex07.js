@@ -31,7 +31,7 @@ export default function example() {
 
     const light = new THREE.DirectionalLight(0xffffff, 1);
     light.position.x = 1;
-    light.position.z = 3;
+    light.position.y = 3;
     light.position.z = 5;
     scene.add(light);
 
