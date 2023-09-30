@@ -67,7 +67,6 @@ export default function example() {
         }
     );
 
-
     function setSize() {
         // 카메라
         camera.aspect = window.innerWidth / window.innerHeight;
