@@ -21,10 +21,10 @@ jobs:
           node-version: "17"
       - name: Install packages
         run: npm install
-        working-directory: /three.js-basic/02_basic
+        working-directory: /02_basic
       - name: Build application
         run: npm run build
-        working-directory: /three.js-basic/02_basic
+        working-directory: /02_basic
       - name: Deploy Github page
         uses: peaceiris/actions-gh-pages@v3
         with:
