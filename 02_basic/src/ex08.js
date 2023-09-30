@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import gsap from 'gsap';
 
 // ----- 주제: 라이브러리를 이용한 애니메이션
 
@@ -39,15 +40,8 @@ export default function example() {
         color: 'red'
     });
 
-    const meshes = [];
-    let mesh;
-    for(let i=0 ; i<10 ; i++) {
-        mesh = new THREE.Mesh(geometry, material);
-        mesh.position.x = Math.random() * 5 - 2.5;
-        mesh.position.z = Math.random() * 5 - 2.5;
-        scene.add(mesh);
-        meshes.push(mesh);
-    }
+    const mesh = new THREE.Mesh(geometry, material);
+    scene.add(mesh);
 
     // 그리기
     let time = Date.now();
@@ -56,16 +50,22 @@ export default function example() {
         const newTime = Date.now();
         const deltaTime = newTime - time;
         time = newTime;
-
-        meshes.forEach(item => {
-            item.rotation.y += deltaTime * 0.001;
-        })
         
         renderer.render(scene, camera);
 
         // window.requestAnimationFrame(draw);
         renderer.setAnimationLoop(draw);
     }
+
+    // gsap
+    gsap.to(
+        mesh.position,
+        {
+            duration: 1,
+            y: 2,
+            z: 3
+        }
+    );
 
 
     function setSize() {
