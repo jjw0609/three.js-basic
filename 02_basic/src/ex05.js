@@ -62,7 +62,6 @@ export default function example() {
         renderer.setAnimationLoop(draw);
     }
 
-
     function setSize() {
         // 카메라
         camera.aspect = window.innerWidth / window.innerHeight;
