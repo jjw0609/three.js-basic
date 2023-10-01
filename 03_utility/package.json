@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "stats.js": "^0.17.0",
     "three": "^0.157.0"
   },
   "devDependencies": {
