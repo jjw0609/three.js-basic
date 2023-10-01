@@ -1,9 +1,8 @@
 body {
-    margin: 0;
-    /* background: dodgerblue; */
+	margin: 0;
 }
 #three-canvas {
-    position: absolute;
-    left: 0;
-    top: 0;
+	position: absolute;
+	left: 0;
+	top: 0;
 }
