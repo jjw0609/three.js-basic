@@ -56,6 +56,8 @@ export default function example() {
 	// 	.step(0.01)
 	// 	.name('메쉬의 Z 위치');
 
+	camera.lookAt(mesh.position);
+
 	// 그리기
 	const clock = new THREE.Clock();
 
@@ -63,6 +65,8 @@ export default function example() {
 		const time = clock.getElapsedTime();
 
 		mesh.rotation.y = time;
+
+		camera.lookAt(mesh.position);
 
 		renderer.render(scene, camera);
 		renderer.setAnimationLoop(draw);
