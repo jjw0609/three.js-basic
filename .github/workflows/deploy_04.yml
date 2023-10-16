@@ -1,0 +1,33 @@
+name: Build and Deploy_04
+
+on:
+  push:
+    branches: [main]
+    paths: "04_transform/**"
+  pull_request:
+    branches: [main]
+    paths: "04_transform/**"
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup nodejs
+        uses: actions/setup-node@v2
+        with:
+          node-version: "17"
+      - name: Install packages
+        run: npm install
+        working-directory: ./04_transform
+      - name: Build application
+        run: npm run build
+        working-directory: ./04_transform
+      - name: Deploy Github page
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          PUBLISH_BRANCH: gh-pages
+          publish_dir: ./04_transform

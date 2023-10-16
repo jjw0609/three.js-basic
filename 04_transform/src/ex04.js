@@ -62,10 +62,6 @@ export default function example() {
 	group1.add(box1, group2);
 	scene.add(group1);
 
-	// // AxesHelper
-	// const axesHelper = new THREE.AxesHelper(3);
-	// scene.add(axesHelper);
-
 	// Dat GUI
 	const gui = new dat.GUI();
 	gui.add(camera.position, 'x', -5, 5, 0.1).name('카메라 X');
