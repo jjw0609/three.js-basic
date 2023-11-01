@@ -19,8 +19,10 @@ jobs:
           node-version: "17"
       - name: Install packages
         run: npm install
+        working-directory: ./05_geometry
       - name: Build application
         run: npm run build
+        working-directory: ./05_geometry
       - name: Deploy Github page
         uses: peaceiris/actions-gh-pages@v3
         with:
