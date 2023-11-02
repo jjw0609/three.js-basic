@@ -39,7 +39,7 @@ export default function example() {
 	const controls = new OrbitControls(camera, renderer.domElement);
 
 	// Mesh
-	const geometry = new THREE.SphereGeometry(5, 32, 32);
+	const geometry = new THREE.SphereGeometry(5, 64, 64);
 	const material = new THREE.MeshStandardMaterial({
 		color: 'orangered',
 		side: THREE.DoubleSide,
@@ -47,6 +47,14 @@ export default function example() {
 	});
 	const mesh = new THREE.Mesh(geometry, material);
 	scene.add(mesh);
+
+	const positionArray = geometry.attributes.position.array;
+	for(let i=0 ; i<positionArray.length ; i += 3) {
+		//정점(Vertex) 한 개의 x, y, z 좌표를 랜덤하게 조정
+		positionArray[i] = positionArray[i] + (Math.random() - 0.5) * 0.2;
+		positionArray[i + 1] = positionArray[i + 1] + (Math.random() - 0.5) * 0.2;
+		positionArray[i + 2] = positionArray[i + 2] + (Math.random() - 0.5) * 0.2;
+	}
 
 	// 그리기
 	const clock = new THREE.Clock();
