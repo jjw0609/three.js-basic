@@ -51,16 +51,23 @@ export default function example() {
 	const positionArray = geometry.attributes.position.array;
 	for(let i=0 ; i<positionArray.length ; i += 3) {
 		//정점(Vertex) 한 개의 x, y, z 좌표를 랜덤하게 조정
-		positionArray[i] = positionArray[i] + (Math.random() - 0.5) * 0.2;
-		positionArray[i + 1] = positionArray[i + 1] + (Math.random() - 0.5) * 0.2;
-		positionArray[i + 2] = positionArray[i + 2] + (Math.random() - 0.5) * 0.2;
+		// positionArray[i] = positionArray[i] + (Math.random() - 0.5) * 0.2;
+		positionArray[i] += (Math.random() - 0.5) * 0.2;
+		positionArray[i + 1] += (Math.random() - 0.5) * 0.2;
+		positionArray[i + 2] += (Math.random() - 0.5) * 0.2;
 	}
 
 	// 그리기
 	const clock = new THREE.Clock();
 
 	function draw() {
-		const delta = clock.getDelta();
+		const time = clock.getElapsedTime() * 3;
+
+		for(let i=0 ; i<positionArray.length ; i += 3) {
+			positionArray[i] += Math.sin(time) * 0.002;
+		}
+
+		geometry.attributes.position.needsUpdate = true;
 
 		renderer.render(scene, camera);
 		renderer.setAnimationLoop(draw);
