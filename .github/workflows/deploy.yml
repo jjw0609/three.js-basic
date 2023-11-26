@@ -19,13 +19,13 @@ jobs:
           node-version: "17"
       - name: Install packages
         run: npm install
-        working-directory: ./06_controls
+        working-directory: ./07_material
       - name: Build application
         run: npm run build
-        working-directory: ./06_controls
+        working-directory: ./07_material
       - name: Deploy Github page
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           PUBLISH_BRANCH: gh-pages
-          publish_dir: ./06_controls/dist
+          publish_dir: ./07_material/dist
