@@ -7,7 +7,7 @@ export default function example() {
 	// 텍스쳐 이미지 로드
 	const textureLoader = new THREE.TextureLoader();
 	// const texture = textureLoader.load('/textures/brick/Brick_Wall_015_ROUGH.jpg');
-	const texture = textureLoader.load('/textures/brick/Brick_Wall_015_ROUGH.jpg',
+	const texture = textureLoader.load('./textures/brick/Brick_Wall_015_ROUGH.jpg',
 		() => {
 			console.log('로드 완료');
 		},
