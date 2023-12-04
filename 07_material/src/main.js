@@ -1,3 +1,3 @@
-import example from './ex06';
+import example from './ex11';
 
 example();
