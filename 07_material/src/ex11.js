@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
-// ----- 주제: 여러가지 텍스쳐가 적용된 큐브
+// ----- 주제: MeshNormalMaterial
 
 export default function example() {
 	// 텍스쳐 이미지 로드
@@ -21,28 +21,8 @@ export default function example() {
 
 	// 텍스쳐 이미지 로드
 	const textureLoader = new THREE.TextureLoader(loadingManager);
-	const rightTexture = textureLoader.load('./textures/mcstyle/right.png');
-	const leftTexture = textureLoader.load('./textures/mcstyle/left.png');
-	const topTexture = textureLoader.load('./textures/mcstyle/top.png');
-	const bottomTexture = textureLoader.load('./textures/mcstyle/bottom.png');
-	const frontTexture = textureLoader.load('./textures/mcstyle/front.png');
-	const backTexture = textureLoader.load('./textures/mcstyle/back.png');
-
-	const materials = [
-		new THREE.MeshBasicMaterial({map: rightTexture}),
-		new THREE.MeshBasicMaterial({map: leftTexture}),
-		new THREE.MeshBasicMaterial({map: topTexture}),
-		new THREE.MeshBasicMaterial({map: bottomTexture}),
-		new THREE.MeshBasicMaterial({map: frontTexture}),
-		new THREE.MeshBasicMaterial({map: backTexture}),
-	];
-
-	rightTexture.magFilter = THREE.NearestFilter;
-	leftTexture.magFilter = THREE.NearestFilter;
-	topTexture.magFilter = THREE.NearestFilter;
-	bottomTexture.magFilter = THREE.NearestFilter;
-	frontTexture.magFilter = THREE.NearestFilter;
-	backTexture.magFilter = THREE.NearestFilter;
+	const gradientTex = textureLoader.load('./textures/gradient.png');
+	gradientTex.magFilter = THREE.NearestFilter;
 
 	// Renderer
 	const canvas = document.querySelector('#three-canvas');
@@ -55,7 +35,7 @@ export default function example() {
 
 	// Scene
 	const scene = new THREE.Scene();
-	scene.background = new THREE.Color('white');
+	// scene.background = new THREE.Color('white');
 
 	// Camera
 	const camera = new THREE.PerspectiveCamera(
@@ -79,7 +59,11 @@ export default function example() {
 
 	// Mesh
 	const geometry = new THREE.BoxGeometry(2, 2, 2);
-	const mesh = new THREE.Mesh(geometry, materials);
+	// const geometry = new THREE.SphereGeometry(1, 64, 64);
+	const material = new THREE.MeshNormalMaterial({
+		// color: 'plum'
+	});
+	const mesh = new THREE.Mesh(geometry, material);
 	scene.add(mesh);
 
 	// 그리기

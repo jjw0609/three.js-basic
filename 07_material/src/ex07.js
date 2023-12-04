@@ -22,11 +22,11 @@ export default function example() {
 	// 텍스쳐 이미지 로드
 	const textureLoader = new THREE.TextureLoader(loadingManager);
 	// const texture = textureLoader.load('/textures/brick/Brick_Wall_015_ROUGH.jpg');
-	const roughTex = textureLoader.load('/textures/brick/Brick_Wall_015_ROUGH.jpg');
-	const colorTex = textureLoader.load('/textures/brick/Brick_Wall_015_COLOR.jpg');
-	const dispTex = textureLoader.load('/textures/brick/Brick_Wall_015_DISP.png');
-	const normTex = textureLoader.load('/textures/brick/Brick_Wall_015_NORM.jpg');
-	const occTex = textureLoader.load('/textures/brick/Brick_Wall_015_OCC.jpg');
+	const roughTex = textureLoader.load('./textures/brick/Brick_Wall_015_ROUGH.jpg');
+	const colorTex = textureLoader.load('./textures/brick/Brick_Wall_015_COLOR.jpg');
+	const dispTex = textureLoader.load('./textures/brick/Brick_Wall_015_DISP.png');
+	const normTex = textureLoader.load('./textures/brick/Brick_Wall_015_NORM.jpg');
+	const occTex = textureLoader.load('./textures/brick/Brick_Wall_015_OCC.jpg');
 
 	// Renderer
 	const canvas = document.querySelector('#three-canvas');

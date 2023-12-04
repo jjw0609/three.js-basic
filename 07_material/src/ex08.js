@@ -21,7 +21,7 @@ export default function example() {
 
 	// 텍스쳐 이미지 로드
 	const textureLoader = new THREE.TextureLoader();
-	const texture = textureLoader.load('/textures/skull/Ground Skull_basecolor.jpg');
+	const texture = textureLoader.load('./textures/skull/Ground Skull_basecolor.jpg');
 
 	// 텍스쳐 변환
 	texture.wrapS = THREE.RepeatWrapping;
