@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import dat from 'dat.gui';
 
-// ----- 주제: PointLight
+// ----- 주제: SpotLight
 
 export default function example() {
 	// Renderer
@@ -36,12 +36,12 @@ export default function example() {
 	const ambientLight = new THREE.AmbientLight('white', 0.5);
 	scene.add(ambientLight);
 
-	const light = new THREE.PointLight('white', 1, 100, 0.5);
+	const light = new THREE.SpotLight('white', 1, 30, Math.PI / 6);
 	light.position.x = -5;
 	light.position.y = 3;
 	scene.add(light);
 
-	const lightHelper = new THREE.PointLightHelper(light);
+	const lightHelper = new THREE.SpotLightHelper(light);
 	scene.add(lightHelper);
 
 	// 그림자 설정
@@ -100,8 +100,8 @@ export default function example() {
 		// const delta = clock.getDelta();
 		const time = clock.getElapsedTime();
 
-		light.position.x = Math.cos(time) * 5;
-		light.position.z = Math.sin(time) * 5;
+		// light.position.x = Math.cos(time) * 5;
+		// light.position.z = Math.sin(time) * 5;
 
 		renderer.render(scene, camera);
 		renderer.setAnimationLoop(draw);
