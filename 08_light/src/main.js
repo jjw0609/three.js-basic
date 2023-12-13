@@ -1,3 +1,3 @@
-import example from './ex04.js';
+import example from './ex05.js';
 
 example();
