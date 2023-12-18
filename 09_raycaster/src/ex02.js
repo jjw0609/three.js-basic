@@ -65,21 +65,24 @@ export default function example() {
 		// const delta = clock.getDelta();
 		const time = clock.getElapsedTime();
 
-		boxMesh.position.y = Math.sin(time) * 2;
-		torusMesh.position.y = Math.cos(time) * 2;
-		boxMesh.material.color.set('plum');
-		torusMesh.material.color.set('lime');
+		// boxMesh.position.y = Math.sin(time) * 2;
+		// torusMesh.position.y = Math.cos(time) * 2;
+		// boxMesh.material.color.set('plum');
+		// torusMesh.material.color.set('lime');
 
 		renderer.render(scene, camera);
 		renderer.setAnimationLoop(draw);
 	}
 
 	function checkIntersects() {
+		if(mouseMoved) return;
+
 		raycaster.setFromCamera(mouse, camera);
 
 		const intersects = raycaster.intersectObjects(meshes);
 		for(const item of intersects) {
 			console.log(item.object.name);
+			item.object.material.color.set('red');
 			break;
 		}
 
@@ -98,11 +101,31 @@ export default function example() {
 	// 이벤트
 	window.addEventListener('resize', setSize);
 	canvas.addEventListener('click', e => {
-		console.log(e.clientX, e.clientY);
 		mouse.x = e.clientX / canvas.clientWidth * 2 - 1;
 		mouse.y = - (e.clientY / canvas.clientHeight * 2 - 1);
 		// console.log(mouse);
 		checkIntersects();
+	});
+
+	let mouseMoved;
+	let clickStartX;
+	let clickStartY;
+	let clickStartTime;
+	canvas.addEventListener('mousedown', e => {
+		clickStartX = e.clientX;
+		clickStartY = e.clientY;
+		clickStartTime = Date.now();
+	});
+	canvas.addEventListener('mouseup', e => {
+		const xGap = Math.abs(e.clientX - clickStartX);
+		const yGap = Math.abs(e.clientY - clickStartY);
+		const timeGap = Date.now() - clickStartTime;
+		
+		if(xGap > 5 || yGap > 5 || timeGap > 500) {
+			mouseMoved = true;
+		} else {
+			mouseMoved = false;
+		}
 	});
 
 	draw();
