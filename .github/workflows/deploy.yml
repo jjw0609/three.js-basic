@@ -19,13 +19,13 @@ jobs:
           node-version: "17"
       - name: Install packages
         run: npm install
-        working-directory: ./09_raycaster
+        working-directory: ./10_custom_model
       - name: Build application
         run: npm run build
-        working-directory: ./09_raycaster
+        working-directory: ./10_custom_model
       - name: Deploy Github page
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           PUBLISH_BRANCH: gh-pages
-          publish_dir: ./09_raycaster/dist
+          publish_dir: ./10_custom_model/dist
