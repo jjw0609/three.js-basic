@@ -45,7 +45,7 @@ export default function example() {
 	let mixer;
 
 	gltfLoader.load(
-		'./models/jjw.glb',
+		'./models/Ankit.glb',
 		gltf => {
 			console.log(gltf.scene.children[0]);
 			const jjwMesh = gltf.scene.children[0];
@@ -53,8 +53,10 @@ export default function example() {
 
 			mixer = new THREE.AnimationMixer(jjwMesh);
 			const actions = [];
+			console.log(gltf.animations);
 			actions[0] = mixer.clipAction(gltf.animations[0]);
-			actions[1] = mixer.clipAction(gltf.animations[1]);
+			// actions[1] = mixer.clipAction(gltf.animations[1]);
+			// actions[2] = mixer.clipAction(gltf.animations[2]);
 			// actions[0].repetitions = 2;
 			// actions[0].clampWhenFinished = true;
 			actions[0].play();
