@@ -19,13 +19,13 @@ export default function example() {
 
 	// Camera
 	const camera = new THREE.PerspectiveCamera(
-		75,
+		80,
 		window.innerWidth / window.innerHeight,
 		0.1,
 		1000
 	);
-	camera.position.y = 1.5;
-	camera.position.z = 4;
+	camera.position.y = 20;
+	camera.position.z = 50;
 	scene.add(camera);
 
 	// Light
@@ -45,7 +45,7 @@ export default function example() {
 	let mixer;
 
 	gltfLoader.load(
-		'./models/Ankit.glb',
+		'./models/totoro.glb',
 		gltf => {
 			console.log(gltf.scene.children[0]);
 			const jjwMesh = gltf.scene.children[0];
