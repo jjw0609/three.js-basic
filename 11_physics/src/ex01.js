@@ -1,4 +1,6 @@
 import * as THREE from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import * as CANNON from 'cannon-es';
 
 // ----- 주제: cannon.js 기본 세팅
 
@@ -40,14 +42,29 @@ export default function example() {
 	scene.add(directionalLight);
 
 	// Controls
+	const controls = new OrbitControls(camera, renderer.domElement);
+
+	// Cannon(물리 엔진)
+	const cannonWorld = new CANNON.World();
+	cannonWorld.gravity.set(0, -10, 0);
 
 	// Mesh
-	const geometry = new THREE.BoxGeometry(1, 1, 1);
-	const material = new THREE.MeshStandardMaterial({
+	const floorMesh = new THREE.Mesh(
+		new THREE.PlaneGeometry(10, 10),
+		new THREE.MeshStandardMaterial({
+			color: 'slategray'
+		})
+	);
+	floorMesh.rotation.x = - Math.PI / 2;
+	scene.add(floorMesh);
+
+	const boxGeometry = new THREE.BoxGeometry(1, 1, 1);
+	const boxMaterial = new THREE.MeshStandardMaterial({
 		color: 'seagreen'
 	});
-	const mesh = new THREE.Mesh(geometry, material);
-	scene.add(mesh);
+	const boxMesh = new THREE.Mesh(boxGeometry, boxMaterial);
+	boxMesh.position.y = 0.5;
+	scene.add(boxMesh);
 
 	// 그리기
 	const clock = new THREE.Clock();
