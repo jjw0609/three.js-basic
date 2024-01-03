@@ -53,6 +53,13 @@ export default function example() {
 	const cannonWorld = new CANNON.World();
 	cannonWorld.gravity.set(0, -10, 0);
 
+	// 성능을 위한 세팅
+	cannonWorld.allowSleep = true;	// body가 엄청 느려지면, 테스트 안함
+	cannonWorld.broadphase = new CANNON.SAPBroadphase(cannonWorld);
+	// SAPBroadphase // 제일 좋음
+	// NaiveBroadphase // 기본값
+	// GridBroadphase // 구역을 나누어 테스트
+
 	// Contact Material
 	const defaultMaterial = new CANNON.Material('default');
 	const rubberMaterial = new CANNON.Material('rubber');
