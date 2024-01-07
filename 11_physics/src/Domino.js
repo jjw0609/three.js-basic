@@ -42,6 +42,8 @@ export class Domino {
             this.rotationY
         );
 
+        this.modelMesh.cannonBody = this.cannonBody;
+
         this.cannonWorld.addBody(this.cannonBody);
     }
 }
