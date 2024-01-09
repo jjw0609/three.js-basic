@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { ImagePanel } from './ImagePanel';
 
 // ----- 주제: 형태가 바뀌는 이미지 패널
 
@@ -52,7 +53,7 @@ export default function example() {
 	// 여러 개의 Plane Mesh 생성
 	let imagePanel;
 	for(let i=0 ; i<positionArray.length ; i+=3) {
-		imagePanel = new imagePanel({
+		imagePanel = new ImagePanel({
 			textureLoader,
 			scene,
 			geometry: planeGeometry,
