@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { House } from './House';
+import gsap from 'gsap';
 
 // ----- 주제: 스크롤에 따라 움직이는 3D 페이지
 
@@ -26,8 +27,7 @@ const camera = new THREE.PerspectiveCamera(
 	0.1,
 	1000
 );
-camera.position.y = 1.5;
-camera.position.z = 4;
+camera.position.set(-5, 2, 25);	
 scene.add(camera);
 
 // Light
@@ -47,7 +47,7 @@ const gltfLoader = new GLTFLoader();
 
 // Mesh
 const floorMesh = new THREE.Mesh(
-	new THREE.PlaneGeometry(10, 10),
+	new THREE.PlaneGeometry(100, 100),
 	new THREE.MeshStandardMaterial({color: 'skyblue'})
 );
 floorMesh.rotation.x = -Math.PI / 2;
@@ -55,7 +55,11 @@ floorMesh.receiveShadow = true;
 scene.add(floorMesh);
 
 const houses = [];
-houses.push(new House({	gltfLoader, scene, modelSrc: './models/house.glb',	x: 0, z: 0, height: 2 }));
+houses.push(new House({	gltfLoader, scene, modelSrc: './models/house.glb',	x: -5, z: 20, height: 2 }));
+houses.push(new House({	gltfLoader, scene, modelSrc: './models/house.glb',	x: 7, z: 10, height: 2 }));
+houses.push(new House({	gltfLoader, scene, modelSrc: './models/house.glb',	x: -10, z: 0, height: 2 }));
+houses.push(new House({	gltfLoader, scene, modelSrc: './models/house.glb',	x: 10, z: -10, height: 2 }));
+houses.push(new House({	gltfLoader, scene, modelSrc: './models/house.glb',	x: -5, z: -20, height: 2 }));
 
 // 그리기
 const clock = new THREE.Clock();
@@ -67,6 +71,25 @@ function draw() {
 	renderer.setAnimationLoop(draw);
 }
 
+let currentSection = 0;
+function setSection() {
+	console.log('setSection 실행!');
+	const newSection = Math.round(window.scrollY / window.innerHeight);
+
+	if(currentSection !== newSection) {
+		console.log('animation!');
+		gsap.to(
+			camera.position,
+			{
+				duration: 1,
+				x: houses[currentSection].x,
+				z: houses[currentSection].z + 5
+			}
+		);
+		currentSection = newSection;
+	}
+}
+
 function setSize() {
 	camera.aspect = window.innerWidth / window.innerHeight;
 	camera.updateProjectionMatrix();
@@ -75,6 +98,7 @@ function setSize() {
 }
 
 // 이벤트
+window.addEventListener('scroll', setSection);
 window.addEventListener('resize', setSize);
 
 draw();
