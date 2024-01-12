@@ -2,7 +2,7 @@ body {
 	margin: 0;
 }
 #three-canvas {
-	position: absolute;
+	position: fixed;
 	left: 0;
 	top: 0;
 }
