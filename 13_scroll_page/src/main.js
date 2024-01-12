@@ -48,7 +48,7 @@ const gltfLoader = new GLTFLoader();
 // Mesh
 const floorMesh = new THREE.Mesh(
 	new THREE.PlaneGeometry(10, 10),
-	new THREE.MeshStandardMaterial({color: 'white'})
+	new THREE.MeshStandardMaterial({color: 'skyblue'})
 );
 floorMesh.rotation.x = -Math.PI / 2;
 floorMesh.receiveShadow = true;
