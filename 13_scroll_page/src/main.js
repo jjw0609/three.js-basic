@@ -1,4 +1,6 @@
 import * as THREE from 'three';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { House } from './House';
 
 // ----- 주제: 스크롤에 따라 움직이는 3D 페이지
 
@@ -10,6 +12,8 @@ const renderer = new THREE.WebGLRenderer({
 });
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(window.devicePixelRatio > 1 ? 2 : 1);
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
 // Scene
 const scene = new THREE.Scene();
@@ -39,13 +43,19 @@ spotLight.shadow.camera.near = 1;
 spotLight.shadow.camera.far = 200;
 scene.add(spotLight);
 
+const gltfLoader = new GLTFLoader();
+
 // Mesh
 const floorMesh = new THREE.Mesh(
-	new THREE.PlaneGeometry(100, 100),
+	new THREE.PlaneGeometry(10, 10),
 	new THREE.MeshStandardMaterial({color: 'white'})
 );
 floorMesh.rotation.x = -Math.PI / 2;
+floorMesh.receiveShadow = true;
 scene.add(floorMesh);
+
+const houses = [];
+houses.push(new House({	gltfLoader, scene, modelSrc: './models/house.glb',	x: 0, z: 0, height: 2 }));
 
 // 그리기
 const clock = new THREE.Clock();
