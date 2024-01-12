@@ -19,13 +19,13 @@ jobs:
           node-version: "17"
       - name: Install packages
         run: npm install
-        working-directory: ./12_particle
+        working-directory: ./13_scroll_page
       - name: Build application
         run: npm run build
-        working-directory: ./12_particle
+        working-directory: ./13_scroll_page
       - name: Deploy Github page
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           PUBLISH_BRANCH: gh-pages
-          publish_dir: ./12_particle/dist
+          publish_dir: ./13_scroll_page/dist
