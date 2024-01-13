@@ -2,23 +2,7 @@ body {
 	margin: 0;
 }
 #three-canvas {
-	position: fixed;
+	position: absolute;
 	left: 0;
 	top: 0;
-}
-.sections {
-	position: relative;
-	z-index: 1;
-}
-.section {
-	box-sizing: border-box;
-	padding: 5rem;
-	height: 100vh;
-}
-.section h2 {
-	margin: 0;
-	font-size: 10vmin;
-}
-.section:nth-child(odd) {
-	text-align: right;
 }
