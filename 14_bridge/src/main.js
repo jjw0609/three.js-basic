@@ -13,7 +13,7 @@ import { Player } from './Player';
 // Renderer
 const canvas = document.querySelector('#three-canvas');
 const renderer = new THREE.WebGLRenderer({
-	canvas: cm1.canvas,
+	canvas,
 	antialias: true
 });
 renderer.setSize(window.innerWidth, window.innerHeight);
@@ -22,7 +22,7 @@ renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
 // Scene은 common.js에서 생성
-cm1.scene.background = new THREE.Color(cm2.backgroundColor);
+scene.background = new THREE.Color(cm2.backgroundColor);
 
 // Camera
 const camera = new THREE.PerspectiveCamera(
@@ -146,6 +146,25 @@ const player = new Player({
 	rotationY: Math.PI
 });
 
+// Raycaster
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
+function checkIntersects() {
+	raycaster.setFromCamera(mouse, camera);
+
+	const intersects = raycaster.intersectObjects(cm1.scene.children);
+	for(const item of intersects) {
+		checkClickedObject(item.object.name);
+		break;
+	}
+}
+function checkClickedObject(objectName) {
+	if(objectName.indexOf('glass') >= 0) {
+		// 유리판을 클릭했을 때
+		
+	}
+}
+
 // 그리기
 const clock = new THREE.Clock();
 
@@ -169,5 +188,10 @@ function setSize() {
 
 // 이벤트
 window.addEventListener('resize', setSize);
+canvas.addEventListener('click', e => {
+	mouse.x = e.clientX / canvas.clientWidth * 2 - 1;
+	mouse.y = -(e.clientY / canvas.clientHeight * 2 - 1);
+	checkIntersects();
+});
 
 draw();
