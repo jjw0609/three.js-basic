@@ -44,8 +44,6 @@ cm1.scene.add(ambientLight);
 const spotLightDistance = 50;
 const spotLight1 = new THREE.SpotLight(cm2.lightColor, 1);
 spotLight1.castShadow = true;
-spotLight1.shadow.mapSize.width = 2048;
-spotLight1.shadow.mapSize.height = 2048;
 const spotLight2 = spotLight1.clone();
 const spotLight3 = spotLight1.clone();
 const spotLight4 = spotLight1.clone();
@@ -53,7 +51,7 @@ const spotLight4 = spotLight1.clone();
 spotLight1.position.set(-spotLightDistance, spotLightDistance, spotLightDistance);
 spotLight2.position.set(spotLightDistance, spotLightDistance, spotLightDistance);
 spotLight3.position.set(-spotLightDistance, spotLightDistance, -spotLightDistance);
-spotLight4.position.set(-spotLightDistance, spotLightDistance, -spotLightDistance);
+spotLight4.position.set(spotLightDistance, spotLightDistance, -spotLightDistance);
 
 cm1.scene.add(spotLight1, spotLight2, spotLight3, spotLight4);
 
@@ -93,8 +91,9 @@ cm1.world.addContactMaterial(glassDefaultContactMaterial);
 cm1.world.addContactMaterial(playerGlassContactMaterial);
 
 // 물체 만들기
-const glassUnitSize = 1.2;
+const glassUnitSize = 1.2;	// 유리판 크기
 const numberOfGlass = 10;	// 유리판 개수
+const objects = [];
 
 
 // 바닥
@@ -115,6 +114,7 @@ const pillar2 = new Pillar({
 	y: 5.5,
 	z: glassUnitSize * 12 + glassUnitSize/2
 });
+objects.push(pillar1, pillar2);
 
 // 바
 const bar1 = new Bar({name: 'bar', x: -1.6, y: 10.3, z: 0});
@@ -169,17 +169,21 @@ for(let i=0 ; i<numberOfGlass ; i++) {
 		type: glassTypes[1],
 		cannonMaterial: cm1.glassMaterial
 	});
+
+	objects.push(glass1, glass2);
 }
 
 // 플레이어
 const player = new Player({
 	name: 'player',
 	x: 0,
-	y: 10.8,
+	y: 10.9,
 	z: 13,
 	rotationY: Math.PI,
-	cannonMaterial: cm1.playerMaterial
+	cannonMaterial: cm1.playerMaterial,
+	mass: 30
 });
+objects.push(player);
 
 // Raycaster
 const raycaster = new THREE.Raycaster();
@@ -209,6 +213,21 @@ function draw() {
 	if(cm1.mixer) cm1.mixer.update(delta);
 
 	cm1.world.step(1/60, delta, 3);
+	objects.forEach(item => {
+		if(item.cannonBody) {
+			item.mesh.position.copy(item.cannonBody.position);
+			item.mesh.quaternion.copy(item.cannonBody.quaternion);
+
+			if(item.modelMesh) {
+				item.modelMesh.position.copy(item.cannonBody.position);
+				item.modelMesh.quaternion.copy(item.cannonBody.quaternion);
+
+				if(item.name === 'player') {
+					item.modelMesh.position.y += 0.15;
+				}
+			}
+		}
+	})
 
 	controls.update();
 

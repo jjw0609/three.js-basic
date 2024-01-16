@@ -17,9 +17,9 @@ export const cm1 = {
 export const cm2 = {
      backgroundColor: '#3e1322',
      lightColor: '#ffe9ac',
-     floorClor: '#111',
-     pillarColor: 'green',
-     barColor: 'red',
+     floorColor: '#786E12',
+     pillarColor: '#006E00',
+     barColor: '#CD3B3B',
      glassColor: 'black'
 };
 
