@@ -157,7 +157,8 @@ for(let i=0 ; i<numberOfGlass ; i++) {
 		x: -1,
 		y: 10.5,
 		z: i * glassUnitSize * 2 - glassUnitSize * 9,
-		type: glassTypes[0]
+		type: glassTypes[0],
+		cannonMaterial: cm1.glassMaterial
 	});
 
 	const glass2 = new Glass({
@@ -165,7 +166,8 @@ for(let i=0 ; i<numberOfGlass ; i++) {
 		x: 1,
 		y: 10.5,
 		z: i * glassUnitSize * 2 - glassUnitSize * 9,
-		type: glassTypes[1]
+		type: glassTypes[1],
+		cannonMaterial: cm1.glassMaterial
 	});
 }
 
@@ -175,7 +177,8 @@ const player = new Player({
 	x: 0,
 	y: 10.8,
 	z: 13,
-	rotationY: Math.PI
+	rotationY: Math.PI,
+	cannonMaterial: cm1.playerMaterial
 });
 
 // Raycaster
@@ -204,6 +207,8 @@ function draw() {
 	const delta = clock.getDelta();
 
 	if(cm1.mixer) cm1.mixer.update(delta);
+
+	cm1.world.step(1/60, delta, 3);
 
 	controls.update();
 
