@@ -7,6 +7,7 @@ export class Glass extends Stuff {
         super(info);
 
         this.type = info.type;
+        this.step = info.step;
         this.geometry = geo.glass;
         
         switch(this.type) {
@@ -27,6 +28,7 @@ export class Glass extends Stuff {
         this.mesh.castShadow = true;
         this.mesh.receiveShadow = true;
         this.mesh.name = this.name;
+        this.mesh.step = this.step;
 
         cm1.scene.add(this.mesh);
 
