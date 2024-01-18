@@ -2,6 +2,7 @@ import { cm1, cm2 } from './common';
 import * as THREE from 'three';
 import * as CANNON from 'cannon-es';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import gsap from 'gsap';
 import { Floor } from './Floor';
 import { Pillar } from './Pillar';
 import { Bar } from './Bar';
@@ -209,6 +210,31 @@ function checkClickedObject(mesh) {
 		if(mesh.step - 1 === cm2.step) {
 			cm2.step++;
 			console.log(cm2.step);
+
+			switch(mesh.type) {
+				case 'normal':
+					console.log('normal!');
+					break;
+				case 'strong':
+					console.log('strong!');
+					break;
+			}
+
+			gsap.to(
+				player.cannonBody.position,
+				{
+					duration: 1,
+					x: mesh.position.x,
+					z: glassZ[cm2.step - 1]
+				}
+			);
+			gsap.to(
+				player.cannonBody.position,
+				{
+					duration: 0.4,
+					y: 12
+				}
+			);
 		}
 	}
 }
