@@ -123,19 +123,20 @@ const bar2 = new Bar({name: 'bar', x: -0.4, y: 10.3, z: 0});
 const bar3 = new Bar({name: 'bar', x: 0.4, y: 10.3, z: 0});
 const bar4 = new Bar({name: 'bar', x: 1.6, y: 10.3, z: 0});
 
+const sideLights = [];
 for(let i=0 ; i<49 ; i++) {
-	new SideLight({
+	sideLights.push(new SideLight({
 		name: 'sideLight',
 		container: bar1.mesh,
 		z: i * 0.5 - glassUnitSize * 10
-	})
+	}));
 }
 for(let i=0 ; i<49 ; i++) {
-	new SideLight({
+	sideLights.push(new SideLight({
 		name: 'sideLight',
 		container: bar4.mesh,
 		z: i * 0.5 - glassUnitSize * 10
-	})
+	}));
 }
 
 // 유리판
@@ -226,6 +227,9 @@ function checkClickedObject(mesh) {
 						fail = true;
 						player.actions[0].stop();
 						player.actions[1].play();
+						sideLights.forEach(item => {
+							item.turnOff();
+						});
 					}, 700);
 					break;
 				case 'strong':
