@@ -39,5 +39,14 @@ export const mat = {
     bar: new MeshPhongMaterial({color: cm2.barColor}),
     sideLight: new MeshPhongMaterial({color: cm2.lightColor}),
     glass1: new MeshPhongMaterial({color: cm2.glassColor, transparent: true, opacity: 0.1}),
-    glass2: new MeshPhongMaterial({color: cm2.glassColor, transparent: true, opacity: 0.3})
+    glass2: new MeshPhongMaterial({color: cm2.glassColor, transparent: true, opacity: 0.1})
+};
+
+const normalSound = new Audio();
+normalSound.src = './sounds/normal.mp3';
+const strongSound = new Audio();
+strongSound.src = './sounds/strong.mp3';
+export const sounds = {
+    normal: normalSound,
+    strong: strongSound
 };
