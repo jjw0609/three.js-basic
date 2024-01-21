@@ -256,6 +256,30 @@ function checkClickedObject(mesh) {
 					y: 12
 				}
 			);
+
+			// 클리어
+			if(cm2.step === numberOfGlass && mesh.type === 'strong') {
+				setTimeout(() => {
+					player.actions[2].stop();
+					player.actions[2].play();
+
+					gsap.to(
+						player.cannonBody.position,
+						{
+							duration: 1,
+							x: 0,
+							z: -14
+						}
+					);
+					gsap.to(
+						player.cannonBody.position,
+						{
+							duration: 0.4,
+							y: 12
+						}
+					);
+				}, 1500);
+			}
 		}
 	}
 }
