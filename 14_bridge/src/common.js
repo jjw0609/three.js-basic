@@ -16,13 +16,13 @@ export const cm1 = {
 
 export const cm2 = {
     step: 0,
-    backgroundColor: '#3e1322',
-    lightColor: '#ffe9ac',
-    lightOffColor: '#222',
-    floorColor: '#786E12',
-    pillarColor: '#006E00',
-    barColor: '#CD3B3B',
-    glassColor: 'black'
+	backgroundColor: '#3e1322',
+	lightColor: '#ffe9ac',
+	lightOffColor: '#222',
+	floorColor: '#111',
+	pillarColor: '#071d28',
+	barColor: '#441c1d',
+	glassColor: '#9fdfff'
 };
 
 export const geo = {

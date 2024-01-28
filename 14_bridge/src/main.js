@@ -50,7 +50,7 @@ const ambientLight = new THREE.AmbientLight(cm2.lightColor, 0.8);
 cm1.scene.add(ambientLight);
 
 const spotLightDistance = 50;
-const spotLight1 = new THREE.SpotLight(cm2.lightColor, 1);
+const spotLight1 = new THREE.SpotLight(cm2.lightColor, 20000);
 spotLight1.castShadow = true;
 const spotLight2 = spotLight1.clone();
 const spotLight3 = spotLight1.clone();
