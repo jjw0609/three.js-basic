@@ -19,13 +19,13 @@ jobs:
           node-version: "17"
       - name: Install packages
         run: npm install
-        working-directory: ./14_bridge
+        working-directory: ./15_multicanvas
       - name: Build application
         run: npm run build
-        working-directory: ./14_bridge
+        working-directory: ./15_multicanvas
       - name: Deploy Github page
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           PUBLISH_BRANCH: gh-pages
-          publish_dir: ./14_bridge/dist
+          publish_dir: ./15_multicanvas/dist
