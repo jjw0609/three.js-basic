@@ -25,4 +25,29 @@ export class CreateScene {
 
         this.scene.add(this.camera);
     }
+
+    set(func) {
+        func();
+    }
+
+    render() {
+        const renderer = this.renderer;
+        const rect = this.elem.getBoundingClientRect();
+
+        if(
+            rect.top > renderer.domElement.clientHeight ||
+            rect.bottom < 0 ||
+            rect.left > renderer.domElement.clientWidth ||
+            rect.right < 0
+        ) {
+            return;
+        }
+
+        const canvasBottom = renderer.domElement.clientHeight - rect.bottom;
+        renderer.setScissor(rect.left, canvasBottom, rect.width, rect.height);
+        renderer.setViewport(rect.left, canvasBottom, rect.width, rect.height);
+        renderer.setScissorTest(true);
+
+        renderer.render(this.scene, this.camera);
+    }
 }
