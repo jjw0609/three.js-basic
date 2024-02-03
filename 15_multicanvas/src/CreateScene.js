@@ -24,6 +24,8 @@ export class CreateScene {
         this.camera.position.z = cameraPosition.z;
 
         this.scene.add(this.camera);
+
+        this.meshes = [];
     }
 
     set(func) {
@@ -42,6 +44,9 @@ export class CreateScene {
         ) {
             return;
         }
+
+        this.camera.aspect = rect.width / rect.height;
+        this.camera.updateProjectionMatrix();
 
         const canvasBottom = renderer.domElement.clientHeight - rect.bottom;
         renderer.setScissor(rect.left, canvasBottom, rect.width, rect.height);
