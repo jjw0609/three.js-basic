@@ -110,7 +110,7 @@ const gltfLoader = new GLTFLoader();
 const house = new House({
 	gltfLoader,
 	scene,
-	modelSrc: '/models/house.glb',
+	modelSrc: './models/house.glb',
 	x: 5,
 	y: -1.3,
 	z: 2
